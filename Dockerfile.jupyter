@@ -3,7 +3,8 @@ FROM quay.io/jupyter/pyspark-notebook:spark-3.5.3
 USER root
 RUN apt-get update && \
     apt-get install -y wget && \
+    rm -rf /var/lib/apt/lists/* && \
     wget https://jdbc.postgresql.org/download/postgresql-42.7.0.jar -P /usr/local/spark/jars/ && \
-    chown -R ${NB_UID}:${NB_GID} /usr/local/spark/jars/postgresql-42.7.0.jar
+    chown ${NB_UID}:${NB_GID} /usr/local/spark/jars/postgresql-42.7.0.jar
 
 USER ${NB_UID}

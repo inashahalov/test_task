@@ -24,14 +24,12 @@ RUN wget -q https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-$
 RUN mkdir -p /opt/spark/jars \
     && wget -q https://jdbc.postgresql.org/download/postgresql-42.7.0.jar -P /opt/spark/jars/
 
-RUN pip install --user psycopg2-binary==2.9.9 'apache-airflow[postgres]==2.10.2' \
- --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.2/constraints-3.10.txt"
-
+RUN pip install --user 'apache-airflow[postgres]==2.10.5' \
+    --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.10.5/constraints-3.10.txt"
 
 COPY requirements.txt .
 RUN pip install --user --no-cache-dir -r requirements.txt
 
-RUN mkdir -p /usr/local/airflow/dags
 RUN mkdir -p /usr/local/airflow/dags/data
 
 WORKDIR /usr/local/airflow
@@ -51,9 +49,7 @@ ENV AIRFLOW__SPARK__SPARK_HOME=/opt/spark
 
 ENV HADOOP_CONF_DIR=""
 ENV YARN_CONF_DIR=""
-
 ENV SPARK_MASTER='local[*]'
-ENV YARN_CONF_DIR='client'
 
 COPY ./dags/ /usr/local/airflow/dags/
 COPY ./data /usr/local/airflow/data
