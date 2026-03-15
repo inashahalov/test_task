@@ -68,13 +68,14 @@ docker-compose up -d
 ---
 
 ##  Файлы проекта
-
-<details>
-<summary><strong>1. covid_etl_dag.py (основной DAG)</strong></summary>
 transform_stage.py (альтернатива для масштабирования)
 aggregate_mart.py (альтернатива для масштабирования)
 
 Сейчас работает Pandas версия, а Spark — альтернатива для масштабирования.
+
+<details>
+<summary><strong>1. covid_etl_dag.py (основной DAG)</strong></summary>
+
 
 ```python
 """
